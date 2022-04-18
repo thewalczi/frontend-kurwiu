@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import React, { useEffect } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Button = ({ click, name }) => {
+  useEffect(() => {
+    console.log("button update");
+  }, [name]);
+
+  return <button onClick={() => click()}>Update</button>;
+};
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "Siema Kurwie",
+    };
+  }
+
+  componentDidMount() {
+    console.log("app Mount");
+  }
+
+  componentDidUpdate() {
+    console.log("app update");
+  }
+
+  handleClick = () => {
+    this.setState({ name: "Elo mordy" });
+  };
+
+  render() {
+    return (
+      <div>
+        <div>{this.state.name}</div>
+        <Button click={this.handleClick} name={this.state.name} />
+      </div>
+    );
+  }
 }
 
 export default App;
